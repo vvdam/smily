@@ -1,0 +1,15 @@
+/* Appliquez à l'élément parent pour le layout flex */
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem; /* Ajustez l'espace entre les éléments */
+}
+
+/* Utilisé pour les éléments qui utilisent la classe `relative` */
+
+/* Pour l'image conteneur avec largeur spécifiée */
+.image-container {
+    position: relative;
+    width: 12.5vw; /* 12.5% de la largeur de la fenêtre */
+}

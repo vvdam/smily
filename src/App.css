@@ -1,0 +1,20 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+}
+.sticky-section {
+    position: -webkit-sticky; /* Pour la compatibilité avec les anciens navigateurs */
+    position: sticky;
+    top: 0;
+    height: 200vh; /* 200% de la hauteur de la fenêtre */
+    background-color: #c72626; /* Couleur de fond rouge */
+    background-image: url("../src/assets/Noise.png");
+    font-size: 3.5vw; /* Taille du texte en unités viewport width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white; /* Couleur du texte en blanc */
+    padding-bottom: 10vh; /* Padding en bas en unités viewport height */
+    margin-bottom: 50vh; /* Ajoute de l'espace entre les sections */
+}
