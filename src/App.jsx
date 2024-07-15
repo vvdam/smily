@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import Lenis from "lenis";
 import "./App.css";
-import Section1 from "./components/Landing/Section1/Section1";
+import Section1 from "./components/Section1/Section1";
 import Section2 from "./components/Section2/Section2";
+import Section3 from "./components/Section3/Section3";
 
 function App() {
     const container = useRef();
@@ -51,7 +52,7 @@ function App() {
                 <Section_2 scrollYProgress={scrollYProgress} />
             </section>
             <section>
-                <Section2 />
+                <Section3 />
             </section>
         </>
     );

@@ -1,4 +1,4 @@
-import img from "../../assets/1.jpg";
+import img from "../../assets/image5.jpg";
 import "./section2.css";
 export default function Section2() {
     return (
@@ -10,7 +10,7 @@ export default function Section2() {
                     <img
                         style={{
                             position: "relative",
-                            height: "8vh",
+                            height: "9vh",
                             width: "12.5vw ",
                         }}
                         src={img}
@@ -19,7 +19,7 @@ export default function Section2() {
                 </div>
                 <p>☺︎</p>
             </div>
-            <h3>Hello</h3>
+            <h3>WHAT</h3>
             <div className="flex-container">
                 <p>My name is</p>
                 <div className="image-container">
@@ -35,7 +35,7 @@ export default function Section2() {
                 </div>
                 <p>☺︎</p>
             </div>
-            <h3>Hello</h3>
+            <h3>WHAT</h3>
             <div className="flex-container">
                 <p>My name is</p>
                 <div className="image-container">
@@ -51,7 +51,7 @@ export default function Section2() {
                 </div>
                 <p>☺︎</p>
             </div>
-            <h3>Hello</h3>
+            <h3>WHAT</h3>
             <div className="flex-container">
                 <p>M’name is ADAM</p>
                 {/* <div className="image-container">
