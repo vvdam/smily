@@ -17,7 +17,7 @@ export default function Section3() {
             title1: "SOUND",
             title2: "WAVE",
             src: `${img2}`,
-            link: "https://github.com/WildCodeSchool-2024-02/JS-Paris-BrainWaves-P3-Soundwave",
+            link: "https://soundwave-app.fr/",
         },
         {
             title1: "WIZARD'S",
