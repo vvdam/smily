@@ -5,6 +5,9 @@ import "./App.css";
 import Section1 from "./components/Section1/Section1";
 import Section2 from "./components/Section2/Section2";
 import Section3 from "./components/Section3/Section3";
+import right from "./assets/right.svg";
+import left from "./assets/left.svg";
+import Section4 from "./components/Section4/Section4";
 
 function App() {
     const container = useRef();
@@ -53,6 +56,24 @@ function App() {
             </section>
             <section>
                 <Section3 />
+            </section>
+            <div className="deco">
+                <img src={right} className="left " alt="" />
+                <h3
+                    style={{
+                        color: "red",
+                        fontSize: "3rem",
+                        textAlign: "center",
+                        marginBottom: "10rem",
+                    }}
+                >
+                    About Me
+                </h3>
+                <img src={right} className="right" alt="" />
+            </div>
+
+            <section>
+                <Section4 />
             </section>
         </>
     );
