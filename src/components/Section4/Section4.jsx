@@ -2,13 +2,13 @@ import TwoParagraphs from "./TwoParagraphs";
 
 export default function Section4() {
     const leftPhrases = [
-        "The object of art is not to reproduce reality",
-        "but to create a reality of the same intensity.",
+        '"The object of art is not to reproduce reality',
+        'but to create a reality of the same intensity."',
     ];
 
     const rightPhrases = [
-        "My name is Adama 20-year-old web developer,",
-        "",
+        " My name is Adam,",
+        "20-year-old web developer",
         "currently seeking an apprenticeship.",
         "",
         "Passionate about art and design,",
