@@ -29,6 +29,7 @@ body {
         line-height: 66px;
 
         p {
+            font-family: Speltale;
             width: 1000px;
             padding: 40px;
         }

@@ -8,6 +8,7 @@ import Section3 from "./components/Section3/Section3";
 import right from "./assets/right.svg";
 import left from "./assets/left.svg";
 import Section4 from "./components/Section4/Section4";
+import ScrollingCardSection from "./components/section5/x";
 
 function App() {
     const container = useRef();
@@ -37,22 +38,22 @@ function App() {
         );
     };
 
-    const Section_2 = ({ scrollYProgress }) => {
-        const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-        const rotate = useTransform(scrollYProgress, [0, 1], [5, 0]);
+    // const Section_2 = ({ scrollYProgress }) => {
+    //     const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+    //     const rotate = useTransform(scrollYProgress, [0, 1], [5, 0]);
 
-        return (
-            <motion.div style={{ scale, rotate }} className="sticky-section">
-                <Section2 />
-            </motion.div>
-        );
-    };
+    //     return (
+    //         <motion.div style={{ scale, rotate }} className="sticky-section">
+    //             <Section2 />
+    //         </motion.div>
+    //     );
+    // };
 
     return (
         <>
             <section ref={container}>
                 <Section_1 scrollYProgress={scrollYProgress} />
-                <Section_2 scrollYProgress={scrollYProgress} />
+                <ScrollingCardSection />
             </section>
             <section>
                 <Section3 />
