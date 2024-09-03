@@ -1,32 +1,157 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useAnimation } from "framer-motion";
 import { withClick } from "./x2.jsx";
 import "./cardsection.css";
+import vcard_front from "../../assets/cartedevisiteface2.png";
+import vcard_back from "../../assets/cartedevisiteback.png";
 
-const Card = ({ isFlipped, frontImageSrc, backImageSrc, style }) => (
-    <div className="card" style={style}>
-        <div
-            className="card-face card-front"
-            style={{ backfaceVisibility: "hidden" }}
-        >
-            <img src={frontImageSrc} alt="Recto" className="card-image" />
-            <div className="card-text">Recto de la carte</div>
-        </div>
-        <div
-            className="card-face card-back"
+const Card = ({
+    isFlipped,
+    frontImageSrc,
+    backImageSrc,
+    style,
+    rotateX,
+    rotateY,
+}) => {
+    const shadowX = useTransform(rotateY, [-20, 20], [-10, 10]);
+    const shadowY = useTransform(rotateX, [-20, 20], [-10, 10]);
+
+    return (
+        <motion.div
+            className="card"
             style={{
-                backfaceVisibility: "hidden",
-                transform: "rotateY(180deg)",
+                ...style,
+                boxShadow: `${shadowX}px ${shadowY}px 20px rgba(0,0,0,0.3)`,
             }}
         >
-            <img src={backImageSrc} alt="Verso" className="card-image" />
-            <div className="card-text">Verso de la carte</div>
-        </div>
-    </div>
-);
+            <div
+                className="card-face card-front"
+                style={{ backfaceVisibility: "hidden" }}
+            >
+                <img src={frontImageSrc} alt="Recto" className="card-image" />
+            </div>
+            <div
+                className="card-face card-back"
+                style={{
+                    backfaceVisibility: "hidden",
+                    transform: "rotateY(180deg)",
+                }}
+            >
+                <img src={backImageSrc} alt="Verso" className="card-image" />
+            </div>
+        </motion.div>
+    );
+};
 
 const EnhancedCard = withClick(Card);
 
+const TextAnimation = ({ isFlipped }) => {
+    const controls = useAnimation();
+    const [content, setContent] = useState([
+        { text: "Ligne 1 du recto" },
+        { text: "Ligne 2 du recto" },
+        { text: "Ligne 3 du recto" },
+    ]);
+
+    useEffect(() => {
+        const newContent = isFlipped
+            ? [
+                  { text: "Let's connect and create!", type: "header" },
+                  {
+                      text: "+33-07-77-86-81-47",
+                      href: "tel:+33077786814",
+                  },
+                  {
+                      text: "maaalouladam@gmail.com",
+                      href: "mailto:maaalouladam@gmail.com",
+                  },
+                  {
+                      text: "linkedin/Adam Maaloul",
+                      href: "https://www.linkedin.com/in/adam-maaloul-17564026a/",
+                  },
+                  {
+                      text: "twitter/vdam_mp4",
+                      href: "https://x.com/vdam_mp4",
+                  },
+                  {
+                      text: "github/vvdam",
+                      href: "https://github.com/vvdam",
+                  },
+              ]
+            : [
+                  { text: "Ligne 1 du recto" },
+                  { text: "Ligne 2 du recto" },
+                  { text: "Ligne 3 du recto" },
+              ];
+
+        setContent(newContent);
+        controls.start("visible");
+    }, [isFlipped, controls]);
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                when: "beforeChildren",
+                staggerChildren: 0.1,
+                delayChildren: 0.1,
+            },
+        },
+    };
+
+    const lineVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.3,
+                ease: "easeOut",
+            },
+        },
+    };
+
+    return (
+        <motion.div
+            key={isFlipped ? "back" : "front"}
+            variants={containerVariants}
+            initial="hidden"
+            animate={controls}
+        >
+            {content.map((item, index) => (
+                <motion.div key={index} variants={lineVariants}>
+                    <p
+                        className={
+                            item.type === "header" ? "contact-header" : ""
+                        }
+                    >
+                        {item.icon && (
+                            <item.icon
+                                size={18}
+                                style={{
+                                    marginRight: "8px",
+                                    verticalAlign: "middle",
+                                }}
+                            />
+                        )}
+                        {item.href ? (
+                            <a
+                                href={item.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {item.text}
+                            </a>
+                        ) : (
+                            item.text
+                        )}
+                    </p>
+                </motion.div>
+            ))}
+        </motion.div>
+    );
+};
 const ScrollingCardSection = () => {
     const sectionRef = useRef(null);
     const { scrollYProgress } = useScroll({
@@ -34,20 +159,16 @@ const ScrollingCardSection = () => {
         offset: ["start end", "end start"],
     });
 
-    // Définissez ici les points de début et de fin du mouvement
     const startMove = 0;
-    const endMove = 0.5; // La carte s'arrête à mi-chemin du défilement
+    const endMove = 0.45;
 
     const cardX = useTransform(
         scrollYProgress,
-        [startMove, endMove, 1],
-        ["-50%", "0%", "10%"]
+        [startMove, endMove, 0.55, 1],
+        ["-100%", "10%", "10%", "-100%"]
     );
 
-    const frontImageSrc =
-        "https://preview.redd.it/goofy-ass-monke-v0-iffz3ve4ehjb1.jpg?width=1080&crop=smart&auto=webp&s=558b57d6753e8b9f8bd464cca98f960a085dcc63";
-    const backImageSrc =
-        "https://i.pinimg.com/564x/ba/af/cc/baafccb9913986594525e36d9bfbdd2c.jpg";
+    const [isFlipped, setIsFlipped] = useState(false);
 
     return (
         <section ref={sectionRef} className="scrolling-section">
@@ -57,18 +178,16 @@ const ScrollingCardSection = () => {
                         <EnhancedCard
                             width="100%"
                             height="100%"
-                            frontImageSrc={frontImageSrc}
-                            backImageSrc={backImageSrc}
+                            frontImageSrc={vcard_front}
+                            backImageSrc={vcard_back}
+                            isFlipped={isFlipped}
+                            setIsFlipped={setIsFlipped}
                         />
-                        <p>cliquer sur ma carte</p>
+                        <p className="gray">Cliquer sur ma carte</p>
                     </div>
                 </motion.div>
                 <div className="text-content">
-                    <h2>Titre de la section</h2>
-                    <p>
-                        Voici le paragraphe sur la droite. Vous pouvez ajouter
-                        autant de contenu que nécessaire ici.
-                    </p>
+                    <TextAnimation isFlipped={isFlipped} />
                 </div>
             </div>
         </section>

@@ -11,7 +11,8 @@
     align-items: center;
     justify-content: center;
     color: white; /* Couleur du texte en blanc */
-    padding-bottom: 10vh; /* Padding en bas en unités viewport height */
+    /* padding-bottom: 10vh; */
+    /* Padding en bas en unités viewport height */
 }
 p {
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;

@@ -1,9 +1,9 @@
 import "./section3.css";
 import Project from "./Project";
-import img1 from "../../assets/image.jpg";
-import img2 from "../../assets/image2.jpg";
-import img3 from "../../assets/image3.jpg";
-import img4 from "../../assets/image4.jpg";
+import img1 from "../../assets/11.jpg";
+import img2 from "../../assets/4.jpg";
+import img3 from "../../assets/3.jpg";
+import img4 from "../../assets/2.jpg";
 
 export default function Section3() {
     const projects = [

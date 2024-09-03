@@ -1,7 +1,6 @@
 import { motion, useSpring } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 
-// Spring animation parameters
 const spring = {
     type: "spring",
     stiffness: 300,
@@ -14,6 +13,9 @@ export function withClick(Component) {
 
         const handleClick = () => {
             setIsFlipped((prevState) => !prevState);
+            if (props.setIsFlipped) {
+                props.setIsFlipped(!isFlipped);
+            }
         };
 
         const [rotateXaxis, setRotateXaxis] = useState(0);
@@ -75,6 +77,8 @@ export function withClick(Component) {
                     <Component
                         {...props}
                         isFlipped={isFlipped}
+                        rotateX={dx}
+                        rotateY={dy}
                         style={{
                             width: "100%",
                             height: "100%",
