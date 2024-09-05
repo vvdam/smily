@@ -178,6 +178,12 @@ function Inspiration() {
         setPosts(selectRandomPosts(links));
     }, []);
 
+    const getYoutubeSize = (index) => {
+        if (index === 0) return "size-3";
+        if (index === 1) return "size-2";
+        return "size-1";
+    };
+
     return (
         <div className="inspiration-container">
             <h2 className="inspiration-title">
@@ -191,27 +197,20 @@ function Inspiration() {
             <p className="refresh-hint">
                 Rechargez la page pour découvrir de nouvelles inspirations
             </p>
-            <div className="posts-container">
+            <div className="bento-grid">
                 {posts.map((post, index) => (
-                    <motion.div
+                    <div
                         key={index}
-                        className={`post ${post.type}`}
-                        style={{
-                            ...post.position,
-                            position: "absolute",
-                        }}
-                        whileHover={{
-                            scale: 1.05,
-                            zIndex: 10,
-                            transition: { duration: 0.3 },
-                        }}
+                        className={`post ${post.type} ${
+                            post.type === "youtube" ? getYoutubeSize(index) : ""
+                        }`}
                     >
                         {post.type === "twitter" ? (
                             <TwitterPost url={post.url} />
                         ) : (
                             <YouTubePost url={post.url} />
                         )}
-                    </motion.div>
+                    </div>
                 ))}
             </div>
         </div>
@@ -220,29 +219,20 @@ function Inspiration() {
 
 function TwitterPost({ url }) {
     const username = url.split("/")[3];
-    const tweetId = url.split("/").pop();
 
     return (
         <div className="twitter-post">
-            <a href={url} target="_blank" rel="noopener noreferrer">
-                <div className="twitter-header">
-                    <img
-                        src={`https://unavatar.io/twitter/${username}`}
-                        alt="Profile"
-                        className="profile-pic"
-                    />
-                    <div className="twitter-user-info">
-                        <p className="twitter-name">Nom d'utilisateur</p>
-                        <p className="twitter-username">@{username}</p>
-                    </div>
+            <div className="twitter-header">
+                <img
+                    src={`https://unavatar.io/twitter/${username}`}
+                    alt="Profile"
+                    className="profile-pic"
+                />
+                <div className="twitter-user-info">
+                    <p className="twitter-name">{username}</p>
+                    <p className="twitter-username">@{username}</p>
                 </div>
-                <p className="tweet-text">Tweet {tweetId.substring(0, 8)}...</p>
-                <div className="tweet-stats">
-                    <span>💬 --</span>
-                    <span>🔁 --</span>
-                    <span>❤️ --</span>
-                </div>
-            </a>
+            </div>
         </div>
     );
 }
@@ -257,15 +247,9 @@ function YouTubePost({ url }) {
 
     const videoId = getYouTubeVideoId(url);
 
-    if (!videoId) {
-        return <div className="youtube-post">URL YouTube invalide</div>;
-    }
-
     return (
         <div className="youtube-post">
             <iframe
-                width="100%"
-                height="315"
                 src={`https://www.youtube.com/embed/${videoId}`}
                 title="YouTube video player"
                 frameBorder="0"
@@ -278,57 +262,7 @@ function YouTubePost({ url }) {
 
 function selectRandomPosts(allLinks) {
     const shuffled = [...allLinks].sort(() => 0.5 - Math.random());
-    return positionPosts(shuffled.slice(0, 10));
-}
-
-function positionPosts(posts) {
-    const grid = [
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-    ];
-    const margin = 5;
-    const cellSize = (100 - 2 * margin) / 4;
-
-    return posts.map((post) => {
-        let row, col;
-        do {
-            row = Math.floor(Math.random() * 3);
-            col = Math.floor(Math.random() * 4);
-        } while (grid[row][col] === 1);
-
-        grid[row][col] = 1;
-
-        const sizeVariation = Math.random() * 0.2 + 0.9;
-
-        const baseTop = margin + row * cellSize;
-        const baseLeftPosition = margin + col * cellSize;
-        const maxOffset = cellSize * 0.4;
-
-        const randomOffsetY = Math.random() * maxOffset;
-        const randomOffsetX = Math.random() * maxOffset;
-
-        const top = Math.min(
-            Math.max(baseTop + randomOffsetY, margin),
-            100 - margin - cellSize
-        );
-
-        const maxWidth = 300;
-        const maxWidthPercent = (maxWidth / window.innerWidth) * 100;
-        const leftPosition = Math.min(
-            Math.max(baseLeftPosition + randomOffsetX, margin),
-            100 - margin - Math.max(cellSize, maxWidthPercent)
-        );
-
-        return {
-            ...post,
-            position: {
-                top: `${top}%`,
-                left: `${leftPosition}%`,
-                transform: `scale(${sizeVariation})`,
-            },
-        };
-    });
+    return shuffled.slice(0, 15);
 }
 
 export default Inspiration;
