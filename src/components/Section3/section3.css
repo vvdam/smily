@@ -1,5 +1,5 @@
 .main3 {
-    height: 100vh;
+    height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,7 +30,7 @@
 }
 .project a p {
     font-size: 5vw;
-
+    font-family: Speltale;
     margin: 0px;
 }
 a {
