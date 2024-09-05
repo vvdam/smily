@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import "./inspo.css";
 
 const links = [
@@ -188,21 +189,29 @@ function Inspiration() {
                 />
             </h2>
             <p className="refresh-hint">
-                Refresh the page to discover new inspirations.{" "}
+                Rechargez la page pour découvrir de nouvelles inspirations
             </p>
             <div className="posts-container">
                 {posts.map((post, index) => (
-                    <div
+                    <motion.div
                         key={index}
                         className={`post ${post.type}`}
-                        style={post.position}
+                        style={{
+                            ...post.position,
+                            position: "absolute",
+                        }}
+                        whileHover={{
+                            scale: 1.05,
+                            zIndex: 10,
+                            transition: { duration: 0.3 },
+                        }}
                     >
                         {post.type === "twitter" ? (
                             <TwitterPost url={post.url} />
                         ) : (
                             <YouTubePost url={post.url} />
                         )}
-                    </div>
+                    </motion.div>
                 ))}
             </div>
         </div>
