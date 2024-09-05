@@ -160,11 +160,11 @@ const ScrollingCardSection = () => {
     });
 
     const startMove = 0;
-    const endMove = 0.45;
+    const endMove = 0.5;
 
     const cardX = useTransform(
         scrollYProgress,
-        [startMove, endMove, 0.55, 1],
+        [startMove, endMove, 0.7, 1],
         ["-100%", "10%", "10%", "-100%"]
     );
 

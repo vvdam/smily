@@ -9,6 +9,7 @@ import right from "./assets/right.svg";
 import left from "./assets/left.svg";
 import Section4 from "./components/Section4/Section4";
 import ScrollingCardSection from "./components/section5/x";
+import Inspiration from "./section 6/inpso";
 
 function App() {
     const container = useRef();
@@ -58,24 +59,18 @@ function App() {
             <section>
                 <Section3 />
             </section>
-            <div className="deco">
-                <img src={right} className="left " alt="" />
-                <h3
-                    style={{
-                        color: "red",
-                        fontSize: "3rem",
-                        textAlign: "center",
-                        marginBottom: "10rem",
-                    }}
-                >
-                    About Me
-                </h3>
-                <img src={right} className="right" alt="" />
+            <div style={{ width: "100%", overflow: "hidden" }}>
+                <div className="deco">
+                    <i className="fas fa-chevron-left deco-icon"></i>
+                    <h3>About Me</h3>
+                    <i className="fas fa-chevron-right deco-icon"></i>
+                </div>
             </div>
 
             <section>
                 <Section4 />
             </section>
+            <Inspiration />
         </>
     );
 }

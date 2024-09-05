@@ -13,7 +13,7 @@ export default function Section4() {
         "",
         "Passionate about art and design,",
         "I'm determined to refine my skills",
-        "in a dynamic andinnovative environment.",
+        "in a dynamic and innovative environment.",
         "",
         // "I'm driven by creating",
         // "elegant and intuitive interfaces,",
